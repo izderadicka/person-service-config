@@ -7,7 +7,7 @@ commonAnnotations:
   enableFor: developers
 
 images:
-- digest: sha256:30800d1ecbaa8f42395151763824664cf02c39b628807925e22f07039a27e892
+- digest: sha256:54c0f4072dbebbfc348167fdc798779a7774ec211188c9d52d3519f764716698
   name: image-registry.openshift-image-registry.svc:5000/book-test/person-service
   newName: quay.io/izderadicka/person-service
 
