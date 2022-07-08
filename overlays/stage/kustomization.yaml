@@ -1,5 +1,7 @@
-bases:
-  - ../../base
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
 
 namePrefix: stage-
 commonLabels:
@@ -8,20 +10,35 @@ commonLabels:
 commonAnnotations:
   enableFor: testers
 
-patchesStrategicMerge:
-  - deployment.yaml
-  - route.yaml
+images:
+- digest: sha256:feacaddaea76fe3b3389a9ca2d88f91492922749ed5835f7b28937763d649ffd
+  name: image-registry.openshift-image-registry.svc:5000/book-test/person-service
+  newName: quay.io/izderadicka/person-service
 
-# generate a configmap
 configMapGenerator:
-  - name: app-config
-    literals:
-    - APP_GREETING=We are in new STAGE emv
+- literals:
+  - APP_GREETING=We are in STAGE mode
+  name: app-config
 
 patches:
-  - patch: |-
-      - op: add
-        path: /spec/template/metadata/annotations/app-version
-        value: v.0.0.1a
-    target:
-      kind: Deployment
+- patch: |-
+    - op: replace
+      path: /spec/to/name
+      value: stage-person-service
+  target:
+    kind: Route
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/imagePullPolicy
+      value: Always
+  target:
+    kind: Deployment
+- patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 2
+  target:
+    kind: Deployment
+
+
+
