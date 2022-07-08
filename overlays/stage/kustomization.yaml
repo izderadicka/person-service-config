@@ -13,6 +13,7 @@ commonAnnotations:
 images:
 - name: image-registry.openshift-image-registry.svc:5000/book-test/person-service
   newName: quay.io/izderadicka/person-service
+  newTag: v1.1.0
 
 configMapGenerator:
 - literals:
@@ -38,6 +39,3 @@ patches:
       value: 2
   target:
     kind: Deployment
-
-
-
