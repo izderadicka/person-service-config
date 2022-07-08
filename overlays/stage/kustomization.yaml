@@ -11,8 +11,7 @@ commonAnnotations:
   enableFor: testers
 
 images:
-- digest: sha256:feacaddaea76fe3b3389a9ca2d88f91492922749ed5835f7b28937763d649ffd
-  name: image-registry.openshift-image-registry.svc:5000/book-test/person-service
+- name: image-registry.openshift-image-registry.svc:5000/book-test/person-service
   newName: quay.io/izderadicka/person-service
 
 configMapGenerator:
